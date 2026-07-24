@@ -4,6 +4,8 @@ import com.anik.secureauth.dto.request.LoginRequest;
 import com.anik.secureauth.dto.request.RegisterRequest;
 import com.anik.secureauth.dto.response.LoginResponse;
 import com.anik.secureauth.dto.response.RegisterResponse;
+import com.anik.secureauth.dto.request.RefreshTokenRequest;
+import com.anik.secureauth.dto.response.RefreshTokenResponse;
 
 public interface AuthService {
 
@@ -11,4 +13,5 @@ public interface AuthService {
 
     LoginResponse login(LoginRequest request);
 
+    RefreshTokenResponse refreshToken(RefreshTokenRequest request);
 }

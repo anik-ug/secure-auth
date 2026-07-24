@@ -3,13 +3,11 @@ package com.anik.secureauth.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponse {
+public class RefreshTokenResponse {
 
     private String accessToken;
 
@@ -17,7 +15,4 @@ public class LoginResponse {
 
     private String tokenType;
 
-    private String email;
-
-    private String role;
 }

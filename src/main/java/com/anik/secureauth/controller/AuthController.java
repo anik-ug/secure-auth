@@ -8,6 +8,9 @@ import com.anik.secureauth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import com.anik.secureauth.dto.request.RefreshTokenRequest;
+import com.anik.secureauth.dto.response.RefreshTokenResponse;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,6 +31,15 @@ public class AuthController {
             @Valid @RequestBody LoginRequest request) {
 
         return authService.login(request);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<RefreshTokenResponse> refreshToken(
+            @RequestBody RefreshTokenRequest request) {
+
+        return ResponseEntity.ok(
+                authService.refreshToken(request)
+        );
     }
 
 }
