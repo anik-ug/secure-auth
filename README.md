@@ -8,7 +8,7 @@
 ![JWT](https://img.shields.io/badge/JWT-Authentication-blue)
 ![MySQL](https://img.shields.io/badge/MySQL-8-blue)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+
 
 ---
 
