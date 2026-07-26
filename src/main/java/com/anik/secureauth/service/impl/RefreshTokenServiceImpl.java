@@ -1,4 +1,5 @@
-package com.anik.secureauth.service;
+package com.anik.secureauth.service.impl;
+
 
 import com.anik.secureauth.entity.RefreshToken;
 import com.anik.secureauth.entity.User;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import com.anik.secureauth.service.RefreshTokenService;
+import com.anik.secureauth.exception.RefreshTokenExpiredException;
+import com.anik.secureauth.exception.RefreshTokenNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +41,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
             refreshTokenRepository.delete(token);
 
-            throw new RuntimeException("Refresh token has expired. Please login again.");
+            throw new RefreshTokenExpiredException("Refresh token has expired. Please login again.");
         }
 
         return token;
@@ -48,7 +52,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
         return refreshTokenRepository.findByToken(token)
                 .orElseThrow(() ->
-                        new RuntimeException("Refresh token not found"));
+                        new RefreshTokenNotFoundException("Refresh token not found"));
     }
 
     @Override

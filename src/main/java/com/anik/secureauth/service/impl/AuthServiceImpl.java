@@ -1,5 +1,7 @@
-package com.anik.secureauth.service;
+package com.anik.secureauth.service.impl;
 
+import com.anik.secureauth.service.RefreshTokenService;
+import com.anik.secureauth.service.AuthService;
 import com.anik.secureauth.exception.ResourceAlreadyExistsException;
 import com.anik.secureauth.dto.request.RegisterRequest;
 import com.anik.secureauth.dto.response.RegisterResponse;
@@ -21,6 +23,8 @@ import com.anik.secureauth.dto.response.RefreshTokenResponse;
 import com.anik.secureauth.entity.RefreshToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.anik.secureauth.security.service.CustomUserDetailsService;
+import com.anik.secureauth.dto.request.LogoutRequest;
+import com.anik.secureauth.exception.UserNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final CustomUserDetailsService customUserDetailsService;
+    
     @Override
     public RegisterResponse register(RegisterRequest request) {
 
@@ -66,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                        new UserNotFoundException("User not found"));
 
         String jwtToken = jwtService.generateToken(
                 org.springframework.security.core.userdetails.User
@@ -107,5 +112,14 @@ public class AuthServiceImpl implements AuthService {
                 .refreshToken(refreshToken.getToken())
                 .tokenType("Bearer")
                 .build();
+        }
+
+        @Override
+        public void logout(LogoutRequest request) {
+
+        RefreshToken refreshToken =
+                refreshTokenService.findByToken(request.getRefreshToken());
+
+        refreshTokenService.deleteByUser(refreshToken.getUser());
         }
 }

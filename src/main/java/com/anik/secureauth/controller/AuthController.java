@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.anik.secureauth.dto.request.RefreshTokenRequest;
 import com.anik.secureauth.dto.response.RefreshTokenResponse;
 import org.springframework.http.ResponseEntity;
+import com.anik.secureauth.dto.request.LogoutRequest;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -40,6 +41,15 @@ public class AuthController {
         return ResponseEntity.ok(
                 authService.refreshToken(request)
         );
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(
+            @RequestBody LogoutRequest request) {
+
+        authService.logout(request);
+
+        return ResponseEntity.ok("Logged out successfully");
     }
 
 }
