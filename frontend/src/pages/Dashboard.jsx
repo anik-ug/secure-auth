@@ -5,7 +5,7 @@ import { getCurrentUser } from "../services/userService";
 import { logout } from "../services/authService";
 
 export default function Dashboard() {
-    
+
     const [user, setUser] = useState(null);
 
     const email = user?.email;
@@ -16,6 +16,7 @@ export default function Dashboard() {
     const fetchUser = async () => {
       try {
         const response = await getCurrentUser();
+        console.log("User Response:", response.data);
         setUser(response.data);
       } catch (error) {
         console.error(error);
