@@ -228,35 +228,30 @@ Database tables:
 # 🔑 Authentication Flow
 
 User Registration
-
-↓
-
+        ↓
+Verification Email Sent
+        ↓
+Email Verification
+        ↓
+Account Activated
+        ↓
 Login
-
-↓
-
+        ↓
 Access Token + Refresh Token
-
-↓
-
+        ↓
 Access Protected APIs
-
-↓
-
+        ↓
 Access Token Expires
-
-↓
-
-Refresh Token Generates New Access Token
-
-↓
-
+        ↓
+Refresh Token
+        ↓
+New Access Token
+        ↓
 Continue Access
-
-↓
-
-Logout → Refresh Token Revoked
-
+        ↓
+Logout
+        ↓
+Refresh Token Revoked
 ---
 
 # 🚀 Getting Started
@@ -311,6 +306,11 @@ http://localhost:8080/swagger-ui/index.html
 - Kubernetes Deployment
 
 ---
+
+<p align="center">
+<img src="docs/screenshots/docker-running.png" width="950"/>
+</p>
+
 
 # 👨‍💻 Author
 
