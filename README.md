@@ -1,6 +1,6 @@
 # 🔐 SecureAuth
 
-> A production-ready Authentication & Authorization System built using **Java, Spring Boot, Spring Security, JWT, MySQL, Docker**, and **Swagger UI**.
+> A production-ready Authentication & Authorization REST API built using **Java, Spring Boot, Spring Security, JWT, MySQL, Docker**, and **Swagger/OpenAPI**.
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5-green)
@@ -12,40 +12,65 @@
 
 ---
 
-# 📌 Overview
+## 📌 Overview
 
-SecureAuth is a secure authentication backend built with Spring Boot that demonstrates industry-standard authentication and authorization practices.
+**SecureAuth** is a backend authentication and authorization system built with Spring Boot and Spring Security.
 
-The application provides:
+The project demonstrates how a modern authentication system can be designed with **JWT-based stateless authentication, refresh tokens, email verification, password reset, role-based authorization, secure password hashing, and Dockerized deployment.**
 
-- User Registration
-- Secure Login
-- JWT Authentication
-- Refresh Token Mechanism
-- Role-Based Access Control (RBAC)
-- Dockerized Deployment
-- Swagger API Documentation
-- MySQL Database Integration
-
-This project follows clean architecture and REST API best practices.
+The application follows a layered architecture with RESTful APIs, DTOs, service/repository separation, validation, and centralized exception handling.
 
 ---
 
-# 🚀 Features
+## 🚀 Features
+
+### 🔐 Authentication
 
 - ✅ User Registration
-- ✅ Secure Password Hashing (BCrypt)
+- ✅ Secure Login
+- ✅ BCrypt Password Hashing
 - ✅ JWT Access Token Authentication
 - ✅ Refresh Token Support
-- ✅ Logout with Token Revocation
+- ✅ Logout with Refresh Token Revocation
+- ✅ Protected User Profile API
+
+### 📧 Email Verification
+
+- ✅ Verification Token Generation
+- ✅ Verification Email
+- ✅ Token Expiration
+- ✅ Account Activation after Email Verification
+- ✅ Verification Token Cleanup
+
+### 🔑 Password Reset
+
+- ✅ Forgot Password
+- ✅ Password Reset Token Generation
+- ✅ Password Reset Email
+- ✅ 15-Minute Token Expiration
+- ✅ Secure Password Update using BCrypt
+- ✅ Reset Token Invalidation after Password Change
+- ✅ Previous Reset Token Replacement
+
+### 👑 Authorization
+
+- ✅ Role-Based Access Control (USER / ADMIN)
+- ✅ Protected Admin APIs
+- ✅ Admin User Management
+- ✅ Role Update Support
+
+### 🛡️ Security & Backend
+
 - ✅ Spring Security 6
-- ✅ Role Based Authorization (USER / ADMIN)
+- ✅ Stateless Authentication
+- ✅ JWT Authentication Filter
+- ✅ Input Validation
 - ✅ Global Exception Handling
-- ✅ Bean Validation
-- ✅ Swagger UI Documentation
-- ✅ Docker & Docker Compose
-- ✅ MySQL Database
 - ✅ RESTful API Design
+- ✅ JPA / Hibernate
+- ✅ MySQL Database
+- ✅ Docker & Docker Compose
+- ✅ Swagger / OpenAPI Documentation
 
 ---
 
@@ -57,11 +82,44 @@ This project follows clean architecture and REST API best practices.
 | Framework | Spring Boot 3.5 |
 | Security | Spring Security 6 |
 | Authentication | JWT |
+| Password Hashing | BCrypt |
 | Database | MySQL 8 |
-| ORM | Spring Data JPA (Hibernate) |
-| API Docs | Swagger / OpenAPI |
+| ORM | Spring Data JPA / Hibernate |
+| API Documentation | Swagger / OpenAPI |
 | Build Tool | Maven |
 | Containerization | Docker & Docker Compose |
+
+---
+
+# 🏗️ Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │      Client         │
+                    │ Swagger / Frontend  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    REST Controllers │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     Service Layer   │
+                    │ Auth / Admin / Email│
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │   Repository Layer  │
+                    │    Spring Data JPA  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │       MySQL         │
+                    └─────────────────────┘
 
 ---
 
@@ -73,10 +131,14 @@ secure-auth
 ├── src
 │   ├── controller
 │   ├── service
+│   │   └── impl
 │   ├── repository
 │   ├── security
 │   ├── entity
 │   ├── dto
+│   │   ├── request
+│   │   └── response
+│   ├── exception
 │   └── config
 │
 ├── docs
