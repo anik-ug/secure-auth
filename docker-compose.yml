@@ -32,7 +32,9 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       JWT_SECRET: your-super-secret-key-for-docker
-      JWT_EXPIRATION: 30000
+      JWT_EXPIRATION: 300000
+      SPRING_MAIL_USERNAME: anikkumar993969@gmail.com
+      SPRING_MAIL_PASSWORD: vvqd lgyp tvpl wczk
 
 volumes:
   mysql_data:

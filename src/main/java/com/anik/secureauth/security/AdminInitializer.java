@@ -27,6 +27,7 @@ public class AdminInitializer implements CommandLineRunner {
                     .email(adminEmail)
                     .password(passwordEncoder.encode("Admin@123"))
                     .role(Role.ADMIN)
+                    .enabled(true)
                     .build();
 
             userRepository.save(admin);

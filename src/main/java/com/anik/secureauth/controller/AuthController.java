@@ -12,6 +12,11 @@ import com.anik.secureauth.dto.request.RefreshTokenRequest;
 import com.anik.secureauth.dto.response.RefreshTokenResponse;
 import org.springframework.http.ResponseEntity;
 import com.anik.secureauth.dto.request.LogoutRequest;
+import com.anik.secureauth.service.VerificationTokenService;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.anik.secureauth.dto.request.ForgotPasswordRequest;
+import com.anik.secureauth.dto.request.ResetPasswordRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,6 +24,7 @@ import com.anik.secureauth.dto.request.LogoutRequest;
 public class AuthController {
 
     private final AuthService authService;
+    private final VerificationTokenService verificationTokenService;
 
     @PostMapping("/register")
     public RegisterResponse register(
@@ -50,6 +56,37 @@ public class AuthController {
         authService.logout(request);
 
         return ResponseEntity.ok("Logged out successfully");
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyEmail(
+            @RequestParam String token
+    ) {
+
+        verificationTokenService.verifyToken(token);
+
+        return ResponseEntity.ok("Email verified successfully.");
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest request) {
+
+        authService.forgotPassword(request);
+
+        return ResponseEntity.ok(
+                "Password reset link has been sent to your email"
+        );
+    }
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(
+            @Valid @RequestBody ResetPasswordRequest request) {
+
+        authService.resetPassword(request);
+
+        return ResponseEntity.ok(
+                "Password reset successfully"
+        );
     }
 
 }
