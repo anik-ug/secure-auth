@@ -285,21 +285,24 @@ http://localhost:8080/swagger-ui/index.html
 
 # 🔒 Security Features
 
-- BCrypt Password Encryption
-- JWT Authentication
-- Refresh Token Rotation
-- Stateless Authentication
+-  BCrypt password hashing
+- JWT-based authentication
+- Stateless authentication
+- Refresh token management
+- Refresh token revocation on logout
 - Role-Based Access Control
-- Spring Security Filter Chain
-- Input Validation
-- Global Exception Handling
+- JWT authentication filter
+- Email verification
+- Expiring verification tokens
+- Expiring password reset tokens
+- One-time password reset token usage
+- Input validation
+- Global exception handling
 
 ---
 
 # 📈 Future Improvements
 
-- Email Verification
-- Password Reset
 - OAuth2 Login (Google/GitHub)
 - Redis Token Blacklisting
 - CI/CD using GitHub Actions
