@@ -122,6 +122,7 @@ The application follows a layered architecture with RESTful APIs, DTOs, service/
                     └─────────────────────┘
 
 ---
+```
 
 # 📂 Project Structure
 
@@ -225,6 +226,7 @@ Database tables:
 
 ---
 
+```text
 # 🔑 Authentication Flow
 
 User Registration
@@ -253,6 +255,8 @@ Logout
         ↓
 Refresh Token Revoked
 ---
+
+```
 
 # 🚀 Getting Started
 
